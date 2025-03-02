@@ -1,43 +1,20 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
 
-<style>
-  .best-selling-products {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .best-selling-products__title {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .best-selling-products__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  @media screen and (min-width: 750px) {
-    .best-selling-products__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  
-  .best-selling-products__badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: #e22120;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    font-weight: bold;
-    font-size: 0.8rem;
-    z-index: 2;
-  }
-</style>
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- unless section.settings.enable_quick_add == false -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -53,72 +30,96 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="best-selling-products page-width section-{{ section.id }}-padding">
-    <h2 class="best-selling-products__title {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="text-align: {{ section.settings.text_alignment }}">
-      {{ section.settings.title | escape }}
-    </h2>
-    
-    <div class="best-selling-products__grid">
-      {%- liquid
-        assign collection = collections[section.settings.collection]
-        assign products = collection.products | sort_by: 'best-selling' | limit: section.settings.products_to_show
-      -%}
-      
-      {%- for product in products -%}
-        <div class="best-selling-products__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" 
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {%- if section.settings.show_badge -%}
-            <div class="best-selling-products__badge" style="color: {{ section.settings.badge_color }}; background-color: {{ section.settings.badge_background }};">{{ section.settings.badge_text }}</div>
-          {%- endif -%}
-          {% render 'card-product',
-            card_product: product,
-            media_aspect_ratio: section.settings.image_ratio,
-            show_secondary_image: section.settings.show_secondary_image,
-            show_vendor: section.settings.show_vendor,
-            show_rating: section.settings.show_rating,
-            show_quick_add: section.settings.enable_quick_add
-          %}
-        </div>
-      {%- else -%}
-        {%- for i in (1..2) -%}
-          <div class="best-selling-products__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-              style="--animation-order: {{ forloop.index }};"
-            {% endif %}
-          >
-            {%- if section.settings.show_badge -%}
-            <div class="best-selling-products__badge" style="color: {{ section.settings.badge_color }}; background-color: {{ section.settings.badge_background }};">{{ section.settings.badge_text }}</div>
-          {%- endif -%}
-            {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-            {% render 'card-product', 
-              show_vendor: section.settings.show_vendor, 
-              media_aspect_ratio: section.settings.image_ratio, 
-              show_rating: section.settings.show_rating,
-              show_quick_add: section.settings.enable_quick_add,
-              placeholder_image: placeholder_image 
-            %}
-          </div>
-        {%- endfor -%}
-      {%- endfor -%}
+<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+  <div class="collection section-{{ section.id }}-padding">
+    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width">
+      {%- if section.settings.title != blank -%}
+        <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="text-align: {{ section.settings.text_alignment }}">
+          {{ section.settings.title | escape }}
+        </h2>
+      {%- endif -%}
     </div>
+
+    {%- liquid
+      assign collection = collections[section.settings.collection]
+      assign products = collection.products | sort_by: 'best-selling' | limit: section.settings.products_to_show
+      assign columns_desktop = 2
+      if section.settings.products_to_show >= 3
+        assign columns_desktop = 3
+      endif
+      if section.settings.products_to_show >= 4
+        assign columns_desktop = 4
+      endif
+      assign columns_mobile = 2
+    -%}
+
+    <slider-component class="slider-mobile-gutter page-width">
+      <ul
+        id="Slider-{{ section.id }}"
+        data-id="{{ section.id }}"
+        class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ columns_desktop }}-col-desktop grid--{{ columns_mobile }}-col-tablet-down"
+        role="list"
+      >
+        {%- if products.size > 0 -%}
+          {%- for product in products -%}
+            <li
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                show_quick_add: section.settings.enable_quick_add,
+                bestseller_badge: section.settings.show_bestseller_badge,
+                section_id: section.id
+              %}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..section.settings.products_to_show) -%}
+            <li
+              class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+
+              {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
+              {% render 'card-product', 
+                show_vendor: section.settings.show_vendor, 
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_rating: section.settings.show_rating,
+                show_quick_add: section.settings.enable_quick_add,
+                bestseller_badge: section.settings.show_bestseller_badge,
+                section_id: section.id,
+                placeholder_image: placeholder_image 
+              %}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </slider-component>
     
     {%- if section.settings.show_view_all and section.settings.collection != blank -%}
-      <div class="center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="margin-top: 2rem; text-align: {{ section.settings.text_alignment }}">
-        {%- if section.settings.view_all_style == 'link' -%}
-          <a href="{{ collections[section.settings.collection].url }}" class="link underlined-link">
-            {{ section.settings.view_all_text | escape }}
-          </a>
-        {%- else -%}
-          <a href="{{ collections[section.settings.collection].url }}" class="button{% if section.settings.view_all_style == 'outline' %} button--outline{% endif %}">
-            {{ section.settings.view_all_text | escape }}
-          </a>
-        {%- endif -%}
+      <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <a
+          href="{{ collections[section.settings.collection].url }}"
+          class="{% if section.settings.view_all_style == 'link' %}link underlined-link{% else %}button{% if section.settings.view_all_style == 'outline' %} button--outline{% endif %}{% endif %}"
+          aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: collections[section.settings.collection].title }}"
+        >
+          {{ section.settings.view_all_text | escape }}
+        </a>
       </div>
     {%- endif -%}
   </div>
@@ -151,28 +152,34 @@
       "label": "Number of products to show"
     },
     {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "arch",
+          "label": "Arch"
+        },
+        {
+          "value": "blob",
+          "label": "Blob"
+        },
+        {
+          "value": "chevron",
+          "label": "Chevron"
+        }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
       "type": "checkbox",
-      "id": "show_badge",
+      "id": "show_bestseller_badge",
       "default": true,
       "label": "Show bestseller badge"
-    },
-    {
-      "type": "text",
-      "id": "badge_text",
-      "default": "Bestseller",
-      "label": "Badge text"
-    },
-    {
-      "type": "color",
-      "id": "badge_color",
-      "label": "Badge text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "badge_background",
-      "label": "Badge background color",
-      "default": "#e22120"
     },
     {
       "type": "select",
@@ -344,9 +351,8 @@
       "name": "Best Selling Products",
       "settings": {
         "title": "Best Sellers",
-        "badge_text": "Bestseller",
         "products_to_show": 2,
-        "show_badge": true,
+        "show_bestseller_badge": true,
         "text_alignment": "center"
       }
     }
