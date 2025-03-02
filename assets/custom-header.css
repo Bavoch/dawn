@@ -1,0 +1,71 @@
+/* 自定义导航栏样式 - 叠加在hero背景图上 */
+.header-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.header-wrapper--border-bottom {
+  border-bottom: none;
+}
+
+/* 透明导航栏样式 */
+.transparent-header {
+  background-color: transparent;
+}
+
+/* 导航栏文字颜色调整为白色，以便在深色背景上更清晰 */
+.header__menu-item,
+.header__menu-item span,
+.header__icon,
+.header__icon span,
+.header__heading-link,
+.header__heading {
+  color: #ffffff;
+
+}
+
+/* 下拉菜单背景设置为半透明黑色 */
+.header-wrapper .menu-drawer {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 移动端菜单按钮颜色调整 */
+.header__icon .icon {
+  fill: #ffffff;
+
+}
+
+/* 下拉菜单项悬停效果 */
+.header__menu-item:hover,
+.header__menu-item:hover span {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 移除滚动相关样式，导航栏将跟随页面滚动 */
+
+/* 确保logo在透明背景上可见 */
+.header__heading-logo {
+  /* 移除阴影效果 */
+}
+
+/* 调整下拉菜单样式 */
+.header-wrapper details[open] > summary::before,
+.header-wrapper details[open] > summary::after {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 搜索图标和购物车图标调整 */
+.header__search-form .search__button .icon,
+.header__icon--cart .icon {
+  fill: #ffffff;
+}
+
+/* 确保公告栏在透明导航栏下方正确显示 */
+.announcement-bar {
+  position: relative;
+  z-index: 9;
+}
