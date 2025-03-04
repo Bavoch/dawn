@@ -9,52 +9,23 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+    "crafted_banner": {
+      "type": "crafted-banner",
       "settings": {
-        "image": "shopify://shop_images/pexels-beyzaa-yurtkuran-279977530-30845184.jpg",
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "ambient",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "heading_main": "The next-gen",
+        "heading_stylized": "smart ring",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius en</p>",
+        "button_label_1": "Shop now",
+        "button_link_1": "shopify://collections/all",
+        "button_style_secondary_1": false,
+        "background_color": "#9c9c9c",
+        "image_width": 25,
+        "image_position_x": 50,
+        "image_position_y": 60,
+        "image_border_radius": 0,
+        "image_shadow": false,
+        "image_hover_effect": true,
+        "video_opacity": 100
       }
     },
     "rich_text": {
@@ -239,7 +210,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "crafted_banner",
     "rich_text",
     "best_selling_products",
     "featured_collection",

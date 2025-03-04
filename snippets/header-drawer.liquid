@@ -11,9 +11,9 @@
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
       aria-label="{{ 'sections.header.menu' | t }}"
     >
-      <span>
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
-        {{- 'icon-close.svg' | inline_asset_content -}}
+      <span class="icon-container">
+        <span class="icon-hamburger">{{- 'icon-hamburger.svg' | inline_asset_content -}}</span>
+        <span class="icon-close">{{- 'icon-close.svg' | inline_asset_content -}}</span>
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">

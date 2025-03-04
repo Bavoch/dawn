@@ -3,6 +3,8 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'section-best-selling-products.css' | asset_url | stylesheet_tag }}
+{{ 'bestseller-product-card.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -13,6 +15,9 @@
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
+
+<!-- Debug tool for development -->
+<script src="{{ 'debug-tool.js' | asset_url }}" defer="defer"></script>
 
 
 
@@ -38,11 +43,25 @@
           {{ section.settings.title | escape }}
         </h2>
       {%- endif -%}
+      {%- if section.settings.collection != blank -%}
+        <div class="collection-debug" style="display: none;">
+          <p>Collection ID: {{ section.settings.collection }}</p>
+          <p>Collection Name: {{ collections[section.settings.collection].title }}</p>
+          <p>Products Count: {{ products.size }}</p>
+        </div>
+      {%- endif -%}
     </div>
 
     {%- liquid
       assign collection = collections[section.settings.collection]
-      assign products = collection.products | sort_by: 'best-selling' | limit: section.settings.products_to_show
+      assign products = null
+      assign has_products = false
+      if collection != blank
+        assign products = collection.products | limit: section.settings.products_to_show
+        if products.size > 0
+          assign has_products = true
+        endif
+      endif
       assign columns_desktop = 2
       if section.settings.products_to_show >= 3
         assign columns_desktop = 3
@@ -52,6 +71,17 @@
       endif
       assign columns_mobile = 2
     -%}
+    
+    <!-- Debug info -->
+    <div class="collection-debug" style="display: none;">
+      <p>Collection Handle: {{ section.settings.collection }}</p>
+      <p>Collection Title: {{ collection.title }}</p>
+      <p>Products Count: {{ products.size }}</p>
+      <p>Has Products: {{ has_products }}</p>
+      {% if products.size > 0 and products[0].featured_media %}
+        <p>First Product Image: {{ products[0].featured_media | image_url }}</p>
+      {% endif %}
+    </div>
 
     <slider-component class="slider-mobile-gutter page-width">
       <ul
@@ -60,7 +90,7 @@
         class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ columns_desktop }}-col-desktop grid--{{ columns_mobile }}-col-tablet-down"
         role="list"
       >
-        {%- if products.size > 0 -%}
+        {%- if has_products -%}
           {%- for product in products -%}
             <li
               id="Slide-{{ section.id }}-{{ forloop.index }}"
@@ -71,20 +101,17 @@
               {% endif %}
             >
 
-              {% render 'card-product',
-                card_product: product,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                show_secondary_image: section.settings.show_secondary_image,
+              {% render 'bestseller-product-card',
+                product: product,
+                image_ratio: section.settings.image_ratio,
                 show_vendor: section.settings.show_vendor,
                 show_rating: section.settings.show_rating,
-                show_quick_add: section.settings.enable_quick_add,
-                bestseller_badge: section.settings.show_bestseller_badge,
-                section_id: section.id
+                bestseller_badge: section.settings.show_bestseller_badge
               %}
             </li>
           {%- endfor -%}
         {%- else -%}
+          {%- comment -%}Display placeholder products when no collection is selected or collection is empty{%- endcomment -%}
           {%- for i in (1..section.settings.products_to_show) -%}
             <li
               class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -94,24 +121,34 @@
               {% endif %}
             >
 
-              {%- assign placeholder_image = 'product-apparel-' | append: forloop.index -%}
-              {% render 'card-product', 
-                show_vendor: section.settings.show_vendor, 
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                show_rating: section.settings.show_rating,
-                show_quick_add: section.settings.enable_quick_add,
-                bestseller_badge: section.settings.show_bestseller_badge,
-                section_id: section.id,
-                placeholder_image: placeholder_image 
-              %}
+              <div class="bestseller-card">
+                <div class="bestseller-card__link">
+                  <div class="bestseller-card__media">
+                    <div class="bestseller-card__placeholder">
+                      {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  </div>
+                  <div class="bestseller-card__info">
+                    <h3 class="bestseller-card__title">{{ 'onboarding.product_title' | t }}</h3>
+                    {% if section.settings.show_vendor %}
+                      <p class="bestseller-card__vendor">{{ 'products.product.vendor' | t }}</p>
+                    {% endif %}
+                    <div class="bestseller-card__price">
+                      <span class="bestseller-card__price-regular">{{ 1999 | money }}</span>
+                    </div>
+                    {% if section.settings.show_bestseller_badge %}
+                      <span class="bestseller-card__badge">{{ 'products.product.bestseller' | t }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
             </li>
           {%- endfor -%}
         {%- endif -%}
       </ul>
     </slider-component>
     
-    {%- if section.settings.show_view_all and section.settings.collection != blank -%}
+    {%- if section.settings.show_view_all and section.settings.collection != blank and collections[section.settings.collection] != blank -%}
       <div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <a
           href="{{ collections[section.settings.collection].url }}"

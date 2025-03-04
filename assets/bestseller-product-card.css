@@ -1,0 +1,106 @@
+.bestseller-card {
+  display: block;
+  height: 100%;
+  position: relative;
+  border-radius: var(--card-corner-radius);
+  overflow: hidden;
+  background-color: var(--color-background);
+  box-shadow: 0 0 0 1px rgba(var(--color-foreground-rgb), 0.04);
+  transition: box-shadow 0.3s ease;
+}
+
+.bestseller-card:hover {
+  box-shadow: 0 4px 8px rgba(var(--color-foreground-rgb), 0.08);
+}
+
+.bestseller-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.bestseller-card__media {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%; /* 1:1 Aspect Ratio */
+  background-color: rgba(var(--color-foreground-rgb), 0.04);
+}
+
+.bestseller-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bestseller-card:hover .bestseller-card__image {
+  transform: scale(1.05);
+}
+
+.bestseller-card__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bestseller-card__placeholder .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed var(--color-border);
+}
+
+.bestseller-card__info {
+  padding: 1.5rem;
+}
+
+.bestseller-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+}
+
+.bestseller-card__vendor {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground-rgb), 0.7);
+}
+
+.bestseller-card__price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.bestseller-card__price-regular {
+  font-weight: 500;
+}
+
+.bestseller-card__price-compare {
+  text-decoration: line-through;
+  color: rgba(var(--color-foreground-rgb), 0.7);
+  font-size: 0.9em;
+}
+
+.bestseller-card__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  padding: 0.3rem 0.6rem;
+  font-size: 1.2rem;
+  border-radius: 2px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(var(--color-foreground-rgb), 0.1);
+}

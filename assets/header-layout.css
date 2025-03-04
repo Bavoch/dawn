@@ -1,0 +1,349 @@
+/* 
+  Header Layout CSS
+  Logo centered, menu left, icons right - all in one line with vertical centering
+*/
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  height: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Left section - Menu */
+.header__inline-menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  height: 100%;
+}
+
+.header__inline-menu::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Center section - Logo */
+.header__heading {
+  flex: 0 0 auto;
+  text-align: center;
+  margin: 0 1rem;
+  max-width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.header__heading-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo color is controlled by header.liquid settings */
+
+.header__heading-link {
+  display: flex;
+  align-items: center;
+}
+
+/* Right section - Icons */
+.header__icons {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.header__icon,
+.header__icon span,
+.header__icon svg,
+.header__icon button,
+.header__icon summary,
+.header__icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.header__icon span {
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure mobile menu button appears on the left */
+header-drawer {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+header-drawer summary,
+header-drawer button,
+header-drawer .icon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Adjust list menu to be in one line */
+.list-menu--inline {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+}
+
+/* Ensure all menu items are vertically centered */
+.list-menu__item,
+.list-menu__item a,
+.list-menu__item button,
+.list-menu__item summary {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Ensure all links in the header are vertically centered */
+
+/* Fix for search icon and cart icon alignment */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Fix for dropdown menu alignment */
+.header__submenu {
+  top: 100%;
+}
+
+/* Ensure dropdown menu items are vertically centered */
+.header__submenu .header__menu-item,
+.header__submenu .list-menu__item {
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.header__submenu .header__menu-item span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Fix for localization forms */
+localization-form {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Fix for country/language selectors */
+.disclosure__button {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for cart icon alignment */
+.header__icon--cart {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for modal toggles */
+.modal__toggle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Fix for any buttons in header */
+.header button,
+.header a,
+.header summary {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for account links */
+.header__icon--account {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.header a,
+.header button,
+.header summary {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix icon alignment */
+.icon {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
+/* Icon toggle system - prevent icons from taking space when hidden */
+.header__icon .icon-container {
+  position: relative;
+  display: inline-flex;
+  width: 2.2rem;
+  height: 2.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__toggle-close,
+.modal__toggle-open,
+.icon-close,
+.icon-hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make sure SVG icons are properly sized */
+.modal__toggle-close svg,
+.modal__toggle-open svg,
+.icon-close svg,
+.icon-hamburger svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+/* Hide close icon by default, only show when details is open */
+.modal__toggle-close,
+.modal__toggle-open,
+.icon-close,
+.icon-hamburger {
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modal__toggle-close,
+.icon-close {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal__toggle-open,
+.icon-hamburger {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Show/hide icons when details is open */
+details[open] .modal__toggle-close,
+details[open] .icon-close,
+.header__search details[open] .modal__toggle-close {
+  opacity: 1;
+  visibility: visible;
+}
+
+details[open] .modal__toggle-open,
+details[open] .icon-hamburger,
+.header__search details[open] .modal__toggle-open {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Ensure search modal icons are visible */
+.search-modal__close-button .icon-close,
+.modal__close-button .icon-close,
+.search__button .icon-search,
+.reset__button .icon-reset {
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: static;
+}
+
+/* Fix search form button icon containers */
+.search__button .icon-container,
+.reset__button .icon-container {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Ensure cart and search icons are centered */
+.header__icon--cart,
+.header__icon--search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure localization forms are aligned */
+.localization-form__select {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for details-modal alignment */
+details-modal {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 989px) {
+  .header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .header__heading {
+    max-width: 50%;
+  }
+  
+  /* Ensure mobile menu is vertically centered */
+  .menu-drawer__navigation,
+  .menu-drawer__menu-item,
+  .menu-drawer__menu-item span,
+  .menu-drawer__submenu summary,
+  .menu-drawer__utility-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-drawer__menu-item {
+    height: 44px;
+  }
+  
+  .menu-drawer__menu-item span {
+    flex: 1;
+  }
+  
+  /* Fix for mobile menu drawer toggle */
+  .header__menu-item,
+  .header__menu-item span {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .header__inline-menu {
+    display: none;
+  }
+  
+  header-drawer {
+    display: flex;
+  }
+}

@@ -1,0 +1,248 @@
+{{ 'section-crafted-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="crafted-banner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}" style="{% if section.settings.background_image != blank %}--background-image: url({{ section.settings.background_image | image_url }});{% else %}background-color: {{ section.settings.background_color }};{% endif %}">
+  {% if section.settings.background_video != blank %}
+    <div class="crafted-banner__video-container" style="--video-opacity: {{ section.settings.video_opacity | default: 100 }}%">
+      {{ section.settings.background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'crafted-banner__video' }}
+    </div>
+  {% endif %}
+  <div class="crafted-banner__container page-width">
+    <div class="crafted-banner__text-content">
+      <h2 class="crafted-banner__heading">
+        <span class="crafted-banner__heading-main">{{ section.settings.heading_main }}</span>
+        <span class="crafted-banner__heading-stylized">{{ section.settings.heading_stylized }}</span>
+      </h2>
+      <div class="crafted-banner__text">
+        {{ section.settings.text }}
+      </div>
+      <div class="crafted-banner__buttons">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a
+            {% if section.settings.button_link_1 == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.button_link_1 }}"
+            {% endif %}
+            class="button{% if section.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
+          >
+            {{- section.settings.button_label_1 | escape -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a
+            {% if section.settings.button_link_2 == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.button_link_2 }}"
+            {% endif %}
+            class="button{% if section.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+          >
+            {{- section.settings.button_label_2 | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="crafted-banner__media-container">
+      {%- if section.settings.image != blank -%}
+        {%- assign image_width = section.settings.image_width | default: 25 -%}
+        {%- assign image_position_x = section.settings.image_position_x | default: 50 -%}
+        {%- assign image_position_y = section.settings.image_position_y | default: 60 -%}
+        {%- assign image_border_radius = section.settings.image_border_radius | default: 0 -%}
+        {%- assign image_shadow = section.settings.image_shadow | default: false -%}
+        {%- assign image_hover_effect = section.settings.image_hover_effect | default: true -%}
+        
+        <div class="crafted-banner__image-wrapper" style="
+          --image-width: {{ image_width }}%;
+          --image-position-x: {{ image_position_x }}%;
+          --image-position-y: {{ image_position_y }}%;
+          --image-border-radius: {{ image_border_radius }}px;
+          --image-shadow: {% if image_shadow %}var(--image-shadow-value){% else %}none{% endif %};
+          --image-hover-effect: {% if image_hover_effect %}scale(1.05){% else %}none{% endif %};
+        ">
+          {{
+            section.settings.image
+            | image_url: width: 1500
+            | image_tag:
+              loading: 'eager',
+              class: 'crafted-banner__image',
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '375, 550, 750, 1100, 1500'
+          }}
+        </div>
+      {%- else -%}
+        <div class="crafted-banner__image-wrapper">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg crafted-banner__image' }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Smart Ring Banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading_main",
+      "default": "The next-gen",
+      "label": "Main Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_stylized",
+      "default": "smart ring",
+      "label": "Stylized Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius en</p>",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "default": "Shop now",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_1",
+      "default": false,
+      "label": "Use secondary style for button"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Button label 2"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button link 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_2",
+      "default": false,
+      "label": "Use secondary style for button 2"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#9c9c9c",
+      "label": "Background Color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image (optional)"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video (optional)"
+    },
+    {
+      "type": "range",
+      "id": "video_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Video Opacity",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Ring Image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Width",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Horizontal Position",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Vertical Position",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "image_shadow",
+      "default": false,
+      "label": "Add Shadow"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_hover_effect",
+      "default": true,
+      "label": "Enable Hover Effect"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smart Ring Banner",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

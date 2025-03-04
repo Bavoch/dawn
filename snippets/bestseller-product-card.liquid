@@ -1,0 +1,52 @@
+{% comment %}
+  Renders a simplified product card for best-selling products section
+
+  Accepts:
+  - product: {Object} Product Liquid object
+  - image_ratio: {String} Image aspect ratio setting
+  - show_vendor: {Boolean} Show the product vendor
+  - show_rating: {Boolean} Show the product rating
+  - bestseller_badge: {Boolean} Show bestseller badge
+{% endcomment %}
+
+<div class="bestseller-card">
+  <a href="{{ product.url }}" class="bestseller-card__link">
+    <div class="bestseller-card__media">
+      {% if product.featured_media %}
+        <img
+          src="{{ product.featured_media | image_url: width: 533 }}"
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="eager"
+          width="533"
+          height="533"
+          class="bestseller-card__image"
+        >
+      {% else %}
+        <div class="bestseller-card__placeholder">
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="bestseller-card__info">
+      <h3 class="bestseller-card__title">{{ product.title }}</h3>
+      
+      {% if show_vendor and product.vendor %}
+        <p class="bestseller-card__vendor">{{ product.vendor }}</p>
+      {% endif %}
+      
+      <div class="bestseller-card__price">
+        {% if product.compare_at_price > product.price %}
+          <span class="bestseller-card__price-regular">{{ product.price | money }}</span>
+          <span class="bestseller-card__price-compare">{{ product.compare_at_price | money }}</span>
+        {% else %}
+          <span class="bestseller-card__price-regular">{{ product.price | money }}</span>
+        {% endif %}
+      </div>
+      
+      {% if bestseller_badge %}
+        <span class="bestseller-card__badge">{{ 'products.product.bestseller' | t }}</span>
+      {% endif %}
+    </div>
+  </a>
+</div>
