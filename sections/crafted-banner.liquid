@@ -1,19 +1,62 @@
 {{ 'section-crafted-banner.css' | asset_url | stylesheet_tag }}
 
-<div class="crafted-banner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}" style="{% if section.settings.background_image != blank %}--background-image: url({{ section.settings.background_image | image_url }});{% else %}background-color: {{ section.settings.background_color }};{% endif %}">
+{% style %}
+  .crafted-banner-{{ section.id }} {
+    --heading-font-size: {{ section.settings.heading_font_size }}rem;
+    --heading-stylized-font-size: {{ section.settings.heading_font_size | times: 1.3 }}rem;
+    --heading-color: {{ section.settings.heading_color }};
+    --heading-font-weight: {{ section.settings.heading_font_weight }};
+    --heading-text-align: {{ section.settings.heading_text_align }};
+    --heading-font-family: {{ section.settings.heading_font_family }};
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__heading {
+    color: var(--heading-color);
+    font-size: var(--heading-font-size);
+    font-weight: var(--heading-font-weight);
+    font-family: var(--heading-font-family);
+    text-align: var(--heading-text-align);
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__heading-main {
+    font-size: var(--heading-font-size);
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__heading-stylized {
+    font-size: var(--heading-font-size);
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__video-container {
+    --video-opacity: {{ section.settings.video_opacity | default: 100 }}%;
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__video-container::before {
+    opacity: var(--video-opacity);
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__image-wrapper {
+    --image-width: {{ section.settings.image_width | default: 25 }}%;
+    --image-position-x: {{ section.settings.image_position_x | default: 50 }}%;
+    --image-position-y: {{ section.settings.image_position_y | default: 60 }}%;
+    --image-border-radius: {{ section.settings.image_border_radius | default: 0 }}px;
+    --image-shadow: {% if section.settings.image_shadow %}var(--image-shadow-value){% else %}none{% endif %};
+    --image-hover-effect: {% if section.settings.image_hover_effect %}scale(1.05){% else %}none{% endif %};
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__image-wrapper::before {
+    border-radius: var(--image-border-radius);
+    box-shadow: var(--image-shadow);
+  }
+  .crafted-banner-{{ section.id }} .crafted-banner__image-wrapper:hover {
+    transform: var(--image-hover-effect);
+  }
+{% endstyle %}
+
+<div class="crafted-banner crafted-banner-{{ section.id }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}" 
+  data-content-position="{{ section.settings.content_position }}"
+  style="{% if section.settings.background_image != blank %}--background-image: url({{ section.settings.background_image | image_url }});{% else %}background-color: {{ section.settings.background_color }};{% endif %}"
+>
   {% if section.settings.background_video != blank %}
-    <div class="crafted-banner__video-container" style="--video-opacity: {{ section.settings.video_opacity | default: 100 }}%">
+    <div class="crafted-banner__video-container">
       {{ section.settings.background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'crafted-banner__video' }}
     </div>
   {% endif %}
-  <div class="crafted-banner__container page-width">
+  <div class="crafted-banner__container page-width" style="justify-content: {% if section.settings.content_position == 'bottom-left' %}flex-start{% else %}center{% endif %}; align-items: {% if section.settings.content_position == 'bottom-left' %}flex-end{% else %}center{% endif %};">
     <div class="crafted-banner__text-content">
-      <h2 class="crafted-banner__heading" style="
-        color: {{ section.settings.heading_color }};
-        font-size: {{ section.settings.heading_font_size }}rem;
-        font-weight: {{ section.settings.heading_font_weight }};
-        text-align: {{ section.settings.heading_text_align }};
-      ">
+      <h2 class="crafted-banner__heading">
         <span class="crafted-banner__heading-main">{{ section.settings.heading_main }}</span>
         <span class="crafted-banner__heading-stylized">{{ section.settings.heading_stylized }}</span>
       </h2>
@@ -49,21 +92,7 @@
     </div>
     <div class="crafted-banner__media-container">
       {%- if section.settings.image != blank -%}
-        {%- assign image_width = section.settings.image_width | default: 25 -%}
-        {%- assign image_position_x = section.settings.image_position_x | default: 50 -%}
-        {%- assign image_position_y = section.settings.image_position_y | default: 60 -%}
-        {%- assign image_border_radius = section.settings.image_border_radius | default: 0 -%}
-        {%- assign image_shadow = section.settings.image_shadow | default: false -%}
-        {%- assign image_hover_effect = section.settings.image_hover_effect | default: true -%}
-        
-        <div class="crafted-banner__image-wrapper" style="
-          --image-width: {{ image_width }}%;
-          --image-position-x: {{ image_position_x }}%;
-          --image-position-y: {{ image_position_y }}%;
-          --image-border-radius: {{ image_border_radius }}px;
-          --image-shadow: {% if image_shadow %}var(--image-shadow-value){% else %}none{% endif %};
-          --image-hover-effect: {% if image_hover_effect %}scale(1.05){% else %}none{% endif %};
-        ">
+        <div class="crafted-banner__image-wrapper">
           {{
             section.settings.image
             | image_url: width: 1500
@@ -142,7 +171,37 @@
         }
       ],
       "label": "Heading Font Weight",
-      "default": "bold"
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading Font Family",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary Font"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary Font"
+        },
+        {
+          "value": "playfair",
+          "label": "Playfair Display"
+        },
+        {
+          "value": "custom",
+          "label": "Custom Font"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "text",
+      "id": "custom_font_family",
+      "label": "Custom Font Family (e.g. 'Arial', sans-serif)",
+      "default": "'Arial', sans-serif"
     },
     {
       "type": "select",
@@ -236,6 +295,26 @@
       "unit": "%",
       "label": "Video Opacity",
       "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Content Position"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "bottom-left"
     },
     {
       "type": "header",
