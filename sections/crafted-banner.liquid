@@ -7,7 +7,18 @@
     --heading-color: {{ section.settings.heading_color }};
     --heading-font-weight: {{ section.settings.heading_font_weight }};
     --heading-text-align: {{ section.settings.heading_text_align }};
-    --heading-font-family: {{ section.settings.heading_font_family }};
+    
+    {% if section.settings.heading_font_family == 'primary' %}
+      --heading-font-family: var(--font-heading-family);
+    {% elsif section.settings.heading_font_family == 'secondary' %}
+      --heading-font-family: var(--font-body-family);
+    {% elsif section.settings.heading_font_family == 'playfair' %}
+      --heading-font-family: 'Playfair Display', serif;
+    {% elsif section.settings.heading_font_family == 'custom' %}
+      --heading-font-family: {{ section.settings.custom_font_family }};
+    {% else %}
+      --heading-font-family: var(--font-heading-family);
+    {% endif %}
   }
   .crafted-banner-{{ section.id }} .crafted-banner__heading {
     color: var(--heading-color);
