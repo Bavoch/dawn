@@ -14,40 +14,37 @@
       "settings": {
         "heading_main": "The next-gen",
         "heading_stylized": "smart ring",
+        "heading_color": "#ffffff",
+        "heading_font_size": 5,
+        "heading_font_weight": "normal",
+        "heading_font_family": "primary",
+        "custom_font_family": "'Arial', sans-serif",
+        "heading_text_align": "left",
         "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius en</p>",
         "button_label_1": "Shop now",
         "button_link_1": "shopify://collections/all",
         "button_style_secondary_1": false,
+        "button_label_2": "",
+        "button_link_2": "",
+        "button_style_secondary_2": false,
         "background_color": "#9c9c9c",
+        "video_opacity": 100,
+        "content_position": "bottom-left",
         "image_width": 25,
         "image_position_x": 50,
         "image_position_y": 60,
         "image_border_radius": 0,
         "image_shadow": false,
-        "image_hover_effect": true,
-        "video_opacity": 100
+        "image_hover_effect": true
       }
     },
     "brand_scroll": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class='brand-scroll-container'><div class='brand-scroll-wrapper'><div class='brand-scroll-track'><div class='brand-scroll-item'>Faith in Form, Grace in Silver</div></div></div></div>{{ 'section-brand-scroll.css' | asset_url | stylesheet_tag }}"
-      }
-    },
-    "best_selling_products": {
-      "type": "best-selling-products",
-      "settings": {
-        "title": "Best Sellers",
-        "badge_text": "Bestseller",
-        "heading_size": "h1",
-        "collection": "all",
-        "image_ratio": "square",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "custom_liquid": "<div class='brand-scroll-container'><div class='brand-scroll-wrapper'><div class='brand-scroll-track'><div class='brand-scroll-item'>Faith in Form, Grace in Silver</div></div></div></div>{{ 'section-brand-scroll.css' | asset_url | stylesheet_tag }}",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "featured_collection": {
@@ -77,121 +74,11 @@
         "padding_top": 28,
         "padding_bottom": 36
       }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
     "crafted_banner",
     "brand_scroll",
-    "best_selling_products",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "featured_collection"
   ]
 }
