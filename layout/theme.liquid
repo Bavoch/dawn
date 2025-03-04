@@ -41,6 +41,9 @@
 
     {{ content_for_header }}
 
+    <link rel="stylesheet" href="{{ 'custom-cursor.css' | asset_url }}">
+    <script src="{{ 'custom-cursor.js' | asset_url }}" defer="defer"></script>
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
