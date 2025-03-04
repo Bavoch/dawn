@@ -8,7 +8,12 @@
   {% endif %}
   <div class="crafted-banner__container page-width">
     <div class="crafted-banner__text-content">
-      <h2 class="crafted-banner__heading">
+      <h2 class="crafted-banner__heading" style="
+        color: {{ section.settings.heading_color }};
+        font-size: {{ section.settings.heading_font_size }}rem;
+        font-weight: {{ section.settings.heading_font_weight }};
+        text-align: {{ section.settings.heading_text_align }};
+      ">
         <span class="crafted-banner__heading-main">{{ section.settings.heading_main }}</span>
         <span class="crafted-banner__heading-stylized">{{ section.settings.heading_stylized }}</span>
       </h2>
@@ -102,6 +107,62 @@
       "id": "heading_stylized",
       "default": "smart ring",
       "label": "Stylized Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#333",
+      "label": "Heading Color"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "unit": "rem",
+      "label": "Heading Font Size",
+      "default": 2.5
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        },
+        {
+          "value": "lighter",
+          "label": "Lighter"
+        }
+      ],
+      "label": "Heading Font Weight",
+      "default": "bold"
+    },
+    {
+      "type": "select",
+      "id": "heading_text_align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "label": "Heading Text Align",
+      "default": "center"
     },
     {
       "type": "richtext",
