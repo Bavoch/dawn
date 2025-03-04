@@ -1,0 +1,61 @@
+{{ 'section-brand-scroll.css' | asset_url | stylesheet_tag }}
+
+<div class="brand-scroll-container section" {{ block.shopify_attributes }}>
+  <div class="brand-scroll-wrapper">
+    <div class="brand-scroll-track">
+      {%- for block in section.blocks -%}
+        <div class="brand-scroll-item">
+          {%- if block.settings.logo != blank -%}
+            {{ block.settings.logo | image_url: width: 200 | image_tag: 
+              loading: 'lazy', 
+              class: 'brand-scroll-logo', 
+              alt: block.settings.logo.alt | escape 
+            }}
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <span class="brand-scroll-text">{{ block.settings.text }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brand Scroll",
+  "settings": [
+    {
+      "type": "text",
+      "id": "scroll_speed",
+      "label": "Scroll Speed (seconds)",
+      "default": "20"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Scroll Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Faith in Form, Grace in Silver"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Scroll",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

@@ -7,7 +7,8 @@
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  min-height: 80vh;
+  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -41,16 +42,20 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 0;
+  justify-content: flex-end; /* Align to bottom */
+  align-items: flex-start; /* Align to left */
 }
 
 .crafted-banner__text-content {
   position: absolute;
-  top: 5rem;
-  left: 3rem;
+  top: auto;
+  left: 5rem;
+  bottom: 5rem;
   z-index: 2;
   max-width: 50%;
+  padding: 0;
 }
 
 .crafted-banner__heading {
@@ -152,10 +157,16 @@
     min-height: 60vh;
   }
   
+  .crafted-banner__container {
+    height: 100vh;
+    justify-content: flex-end;
+  }
+  
   .crafted-banner__text-content {
-    top: 3rem;
+    max-width: 90%;
+    padding: 0;
     left: 2rem;
-    max-width: 80%;
+    bottom: 2rem;
   }
   
   .crafted-banner__heading-main {
@@ -187,7 +198,8 @@
 
 @media screen and (min-width: 990px) {
   .crafted-banner__text-content {
-    top: 8rem;
-    left: 5rem;
+    padding: 0;
+    left: 8rem;
+    bottom: 8rem;
   }
 }

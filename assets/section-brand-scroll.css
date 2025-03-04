@@ -1,0 +1,60 @@
+.brand-scroll-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  padding: 1rem 0;
+}
+
+.brand-scroll-wrapper {
+  width: 100%;
+}
+
+.brand-scroll-track {
+  display: flex;
+  width: fit-content;
+  animation: scroll-x linear infinite;
+  animation-duration: var(--scroll-speed, 20s);
+}
+
+.brand-scroll-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 2rem;
+  white-space: nowrap;
+}
+
+.brand-scroll-logo {
+  max-height: 4rem;
+  max-width: 8rem;
+  object-fit: contain;
+}
+
+.brand-scroll-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .brand-scroll-item {
+    margin: 0 1rem;
+  }
+  
+  .brand-scroll-logo {
+    max-height: 3rem;
+  }
+  
+  .brand-scroll-text {
+    font-size: 1rem;
+  }
+}

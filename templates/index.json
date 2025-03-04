@@ -28,34 +28,10 @@
         "video_opacity": 100
       }
     },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+    "brand_scroll": {
+      "type": "custom-liquid",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "custom_liquid": "<div class='brand-scroll-container'><div class='brand-scroll-wrapper'><div class='brand-scroll-track'><div class='brand-scroll-item'>Faith in Form, Grace in Silver</div></div></div></div>{{ 'section-brand-scroll.css' | asset_url | stylesheet_tag }}"
       }
     },
     "best_selling_products": {
@@ -211,7 +187,7 @@
   },
   "order": [
     "crafted_banner",
-    "rich_text",
+    "brand_scroll",
     "best_selling_products",
     "featured_collection",
     "collage",
