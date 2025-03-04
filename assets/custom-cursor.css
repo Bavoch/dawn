@@ -14,7 +14,8 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: all 0.1s ease;
-    mix-blend-mode: difference; /* 增加可见性 */
+    display: block;
+    mix-blend-mode: difference;
   }
 
   .custom-cursor::before,
