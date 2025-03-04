@@ -28,12 +28,14 @@
         "button_link_2": "",
         "button_style_secondary_2": false,
         "background_color": "#9c9c9c",
+        "background_image": "shopify://shop_images/asian-model.webp",
         "video_opacity": 100,
         "content_position": "bottom-left",
+        "image": "shopify://shop_images/image_q5K.webp",
         "image_width": 25,
-        "image_position_x": 50,
-        "image_position_y": 60,
-        "image_border_radius": 0,
+        "image_position_x": 70,
+        "image_position_y": 80,
+        "image_border_radius": 24,
         "image_shadow": false,
         "image_hover_effect": true
       }
