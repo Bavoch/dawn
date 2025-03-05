@@ -1,16 +1,6 @@
 /* 
-  Header styles for non-home pages
+  Header styles for home page and other pages
 */
-
-.header-wrapper:not(.home-header-wrapper) {
-  background-color: #ffffff;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header-wrapper:not(.home-header-wrapper) .header {
-  position: relative;
-}
 
 /* Transparent header for home page */
 .home-header-wrapper {
@@ -23,6 +13,9 @@
 .home-header-wrapper .header {
   background-color: transparent;
 }
+
+/* We don't add any custom styles for non-home pages header */
+/* This allows the theme editor settings to control the header appearance */
 
 /* White text for home page header */
 .home-header-wrapper .header__menu-item,
@@ -41,10 +34,4 @@
   filter: brightness(0) saturate(100%) invert(100%) !important;
 }
 
-/* For mobile */
-@media screen and (max-width: 749px) {
-  .header-wrapper:not(.home-header-wrapper) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-}
+

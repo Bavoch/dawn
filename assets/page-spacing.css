@@ -1,0 +1,14 @@
+/* 
+  Page spacing styles - adds smooth scrolling to all pages
+*/
+
+/* Add smooth scrolling to all pages */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure main content has proper spacing */
+#MainContent {
+  position: relative;
+  z-index: 1;
+}

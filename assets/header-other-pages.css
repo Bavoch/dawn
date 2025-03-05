@@ -1,0 +1,75 @@
+/* 
+  Header styles for non-home pages
+  Provides consistent styling while maintaining brand identity
+*/
+
+/* 基础导航栏样式 */
+.header-wrapper:not(.home-header-wrapper) {
+  background-color: var(--gradient-background);
+  position: relative;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  z-index: 10;
+}
+
+/* 导航栏文字和图标颜色 */
+.header-wrapper:not(.home-header-wrapper) .header__menu-item,
+.header-wrapper:not(.home-header-wrapper) .header__menu-item span,
+.header-wrapper:not(.home-header-wrapper) .header__icon,
+.header-wrapper:not(.home-header-wrapper) .header__icon span,
+.header-wrapper:not(.home-header-wrapper) .header__heading-link {
+  color: rgba(var(--color-foreground), 0.75);
+  transition: color 0.2s ease-in-out;
+}
+
+/* 导航栏文字和图标悬停效果 */
+.header-wrapper:not(.home-header-wrapper) .header__menu-item:hover,
+.header-wrapper:not(.home-header-wrapper) .header__menu-item:hover span,
+.header-wrapper:not(.home-header-wrapper) .header__icon:hover,
+.header-wrapper:not(.home-header-wrapper) .header__icon:hover span {
+  color: rgb(var(--color-foreground));
+}
+
+/* 图标颜色 */
+.header-wrapper:not(.home-header-wrapper) .header__icon .icon {
+  fill: rgba(var(--color-foreground), 0.75);
+  transition: fill 0.2s ease-in-out;
+}
+
+.header-wrapper:not(.home-header-wrapper) .header__icon:hover .icon {
+  fill: rgb(var(--color-foreground));
+}
+
+/* Logo样式调整 */
+.header-wrapper:not(.home-header-wrapper) .header__heading-logo {
+  filter: none; /* 移除首页的反色效果 */
+}
+
+/* 下拉菜单样式 */
+.header-wrapper:not(.home-header-wrapper) .menu-drawer {
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+/* 下拉菜单项样式 */
+.header-wrapper:not(.home-header-wrapper) .menu-drawer__menu-item {
+  color: rgba(var(--color-foreground), 0.75);
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.header-wrapper:not(.home-header-wrapper) .menu-drawer__menu-item:hover {
+  color: rgb(var(--color-foreground));
+  background-color: rgba(var(--color-foreground), 0.04);
+}
+
+/* 搜索和购物车图标 */
+.header-wrapper:not(.home-header-wrapper) .header__search-form .search__button .icon,
+.header-wrapper:not(.home-header-wrapper) .header__icon--cart .icon {
+  fill: rgba(var(--color-foreground), 0.75);
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 989px) {
+  .header-wrapper:not(.home-header-wrapper) .header {
+    padding: 1rem;
+  }
+}
