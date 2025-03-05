@@ -7,6 +7,7 @@
     --heading-color: {{ section.settings.heading_color }};
     --heading-font-weight: {{ section.settings.heading_font_weight }};
     --heading-text-align: {{ section.settings.heading_text_align }};
+    --stylized-heading-font: {{ section.settings.stylized_heading_font }};
     
     {% if section.settings.heading_font_family == 'primary' %}
       --heading-font-family: var(--font-heading-family);
@@ -14,8 +15,6 @@
       --heading-font-family: var(--font-body-family);
     {% elsif section.settings.heading_font_family == 'playfair' %}
       --heading-font-family: 'Playfair Display', serif;
-    {% elsif section.settings.heading_font_family == 'custom' %}
-      --heading-font-family: {{ section.settings.custom_font_family }};
     {% else %}
       --heading-font-family: var(--font-heading-family);
     {% endif %}
@@ -31,7 +30,8 @@
     font-size: var(--heading-font-size);
   }
   .crafted-banner-{{ section.id }} .crafted-banner__heading-stylized {
-    font-size: var(--heading-font-size);
+    font-size: var(--heading-stylized-font-size);
+    font-family: var(--stylized-heading-font);
   }
   .crafted-banner-{{ section.id }} .crafted-banner__video-container {
     --video-opacity: {{ section.settings.video_opacity | default: 100 }}%;
@@ -69,7 +69,7 @@
     <div class="crafted-banner__text-content">
       <h2 class="crafted-banner__heading">
         <span class="crafted-banner__heading-main">{{ section.settings.heading_main }}</span>
-        <span class="crafted-banner__heading-stylized">{{ section.settings.heading_stylized }}</span>
+        <span class="crafted-banner__heading-stylized" style="font-family: {{ section.settings.stylized_heading_font }};">{{ section.settings.heading_stylized }}</span>
       </h2>
       <div class="crafted-banner__text">
         {{ section.settings.text }}
@@ -100,25 +100,6 @@
           </a>
         {%- endif -%}
       </div>
-    </div>
-    <div class="crafted-banner__media-container">
-      {%- if section.settings.image != blank -%}
-        <div class="crafted-banner__image-wrapper">
-          {{
-            section.settings.image
-            | image_url: width: 1500
-            | image_tag:
-              loading: 'eager',
-              class: 'crafted-banner__image',
-              sizes: '(min-width: 750px) 50vw, 100vw',
-              widths: '375, 550, 750, 1100, 1500'
-          }}
-        </div>
-      {%- else -%}
-        <div class="crafted-banner__image-wrapper">
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg crafted-banner__image' }}
-        </div>
-      {%- endif -%}
     </div>
   </div>
 </div>
@@ -200,19 +181,9 @@
         {
           "value": "playfair",
           "label": "Playfair Display"
-        },
-        {
-          "value": "custom",
-          "label": "Custom Font"
         }
       ],
       "default": "primary"
-    },
-    {
-      "type": "text",
-      "id": "custom_font_family",
-      "label": "Custom Font Family (e.g. 'Arial', sans-serif)",
-      "default": "'Arial', sans-serif"
     },
     {
       "type": "select",
@@ -233,6 +204,34 @@
       ],
       "label": "Heading Text Align",
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "stylized_heading_font",
+      "label": "Stylized Heading Font",
+      "options": [
+        {
+          "value": "Arial",
+          "label": "Arial"
+        },
+        {
+          "value": "Georgia",
+          "label": "Georgia"
+        },
+        {
+          "value": "Times New Roman",
+          "label": "Times New Roman"
+        },
+        {
+          "value": "Courier New",
+          "label": "Courier New"
+        },
+        {
+          "value": "Verdana",
+          "label": "Verdana"
+        }
+      ],
+      "default": "Arial"
     },
     {
       "type": "richtext",
@@ -326,67 +325,6 @@
         }
       ],
       "default": "bottom-left"
-    },
-    {
-      "type": "header",
-      "content": "Product Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Ring Image"
-    },
-    {
-      "type": "range",
-      "id": "image_width",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "%",
-      "label": "Image Width",
-      "default": 25
-    },
-    {
-      "type": "range",
-      "id": "image_position_x",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "label": "Horizontal Position",
-      "default": 50
-    },
-    {
-      "type": "range",
-      "id": "image_position_y",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "label": "Vertical Position",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "image_border_radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Border Radius",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "image_shadow",
-      "default": false,
-      "label": "Add Shadow"
-    },
-    {
-      "type": "checkbox",
-      "id": "image_hover_effect",
-      "default": true,
-      "label": "Enable Hover Effect"
     }
   ],
   "presets": [
