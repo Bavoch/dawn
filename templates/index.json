@@ -18,8 +18,8 @@
         "heading_font_size": 5,
         "heading_font_weight": "normal",
         "heading_font_family": "primary",
-        "custom_font_family": "'Arial', sans-serif",
         "heading_text_align": "left",
+        "stylized_heading_font": "Arial",
         "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius en</p>",
         "button_label_1": "Shop now",
         "button_link_1": "shopify://collections/all",
@@ -30,38 +30,7 @@
         "background_color": "#9c9c9c",
         "background_image": "shopify://shop_images/asian-model.webp",
         "video_opacity": 100,
-        "content_position": "bottom-left",
-        "image_width": 25,
-        "image_position_x": 50,
-        "image_position_y": 60,
-        "image_border_radius": 0,
-        "image_shadow": false,
-        "image_hover_effect": true
-      }
-    },
-    "section_brand_scroll_7GEKYY": {
-      "type": "section-brand-scroll",
-      "blocks": {
-        "item_fNq46x": {
-          "type": "item",
-          "settings": {
-            "logo": "{{ shop.brand.logo }}",
-            "text": "Faith in Form, Grace in Silver"
-          }
-        },
-        "item_NzMMCb": {
-          "type": "item",
-          "settings": {
-            "text": "Faith in Form, Grace in Silver"
-          }
-        }
-      },
-      "block_order": [
-        "item_fNq46x",
-        "item_NzMMCb"
-      ],
-      "settings": {
-        "scroll_speed": "20"
+        "content_position": "bottom-left"
       }
     },
     "best_selling_products_A7DAbV": {
@@ -83,7 +52,7 @@
         "view_all_text": "View all",
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
-        "padding_top": 36,
+        "padding_top": 100,
         "padding_bottom": 36
       }
     },
@@ -118,7 +87,6 @@
   },
   "order": [
     "crafted_banner",
-    "section_brand_scroll_7GEKYY",
     "best_selling_products_A7DAbV",
     "featured_collection"
   ]

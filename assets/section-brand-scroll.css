@@ -1,7 +1,11 @@
 .brand-scroll-container {
   width: 100%;
   overflow: hidden;
-  background-color: #f4f4f4;
+  padding: 1rem 0;
+}
+.brand-scroll-container {
+  width: 100%;
+  overflow: hidden;
   padding: 1rem 0;
 }
 

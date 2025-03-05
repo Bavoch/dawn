@@ -1,6 +1,6 @@
 {{ 'section-brand-scroll.css' | asset_url | stylesheet_tag }}
 
-<div class="brand-scroll-container section" {{ block.shopify_attributes }}>
+<div class="brand-scroll-container section" {{ block.shopify_attributes }} style="background-color: {{ section.settings.background_color }};">
   <div class="brand-scroll-wrapper">
     <div class="brand-scroll-track">
       {%- for block in section.blocks -%}
@@ -30,6 +30,12 @@
       "id": "scroll_speed",
       "label": "Scroll Speed (seconds)",
       "default": "20"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
     }
   ],
   "blocks": [
@@ -53,8 +59,7 @@
   ],
   "presets": [
     {
-      "name": "Brand Scroll",
-      "category": "Text"
+      "name": "Brand Scroll"
     }
   ]
 }
