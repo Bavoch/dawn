@@ -5,16 +5,13 @@
   border-radius: 8px; /* 更圆润的边角 */
   overflow: hidden;
   background-color: #f9f9f9; /* 浅灰色背景 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-  transition: box-shadow 0.3s ease;
   text-decoration: none; /* 移除链接的下划线 */
   color: inherit; /* 继承父元素的颜色 */
 }
 
-.bestseller-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停时的阴影效果 */
+.bestseller-card:hover .bestseller-card__title-overlay {
+  opacity: 1;
 }
-
 
 .bestseller-card__link {
   display: block;
@@ -61,52 +58,34 @@
   border: 1px dashed var(--color-border);
 }
 
-.bestseller-card__info {
-  padding: 1.5rem;
+/* 标题覆盖层样式 */
+.bestseller-card__title-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* 移除黑色背景 */
+  transition: opacity 0.3s ease;
+  opacity: 1; /* 始终显示 */
 }
 
 .bestseller-card__title {
-  margin: 0.75rem 0;
+  margin: 0;
+  padding: 0.5rem 1rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-foreground); /* 使用主题默认颜色 */
+  text-align: center;
+  max-width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.bestseller-card__vendor {
-  margin: 0 0 0.5rem;
-  font-size: 1.2rem;
-  color: rgba(var(--color-foreground-rgb), 0.7);
-}
-
-.bestseller-card__price {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.bestseller-card__price-regular {
-  font-weight: 500;
-}
-
-.bestseller-card__price-compare {
-  text-decoration: line-through;
-  color: rgba(var(--color-foreground-rgb), 0.7);
-  font-size: 0.9em;
-}
-
-.bestseller-card__badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  padding: 0.3rem 0.6rem;
-  font-size: 1.2rem;
-  border-radius: 2px;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(var(--color-foreground-rgb), 0.1);
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 最多显示两行 */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); /* 白色文字阴影增强可读性 */
 }

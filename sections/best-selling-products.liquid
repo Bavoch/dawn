@@ -103,10 +103,7 @@
 
               {% render 'bestseller-product-card',
                 product: product,
-                image_ratio: section.settings.image_ratio,
-                show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating,
-                bestseller_badge: section.settings.show_bestseller_badge
+                image_ratio: section.settings.image_ratio
               %}
             </li>
           {%- endfor -%}
@@ -127,18 +124,9 @@
                     <div class="bestseller-card__placeholder">
                       {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
                     </div>
-                  </div>
-                  <div class="bestseller-card__info">
-                    <h3 class="bestseller-card__title">{{ 'onboarding.product_title' | t }}</h3>
-                    {% if section.settings.show_vendor %}
-                      <p class="bestseller-card__vendor">{{ 'products.product.vendor' | t }}</p>
-                    {% endif %}
-                    <div class="bestseller-card__price">
-                      <span class="bestseller-card__price-regular">{{ 1999 | money }}</span>
+                    <div class="bestseller-card__title-overlay">
+                      <h3 class="bestseller-card__title">{{ 'onboarding.product_title' | t }}</h3>
                     </div>
-                    {% if section.settings.show_bestseller_badge %}
-                      <span class="bestseller-card__badge">{{ 'products.product.bestseller' | t }}</span>
-                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -212,12 +200,7 @@
       "default": "default",
       "label": "Image shape"
     },
-    {
-      "type": "checkbox",
-      "id": "show_bestseller_badge",
-      "default": true,
-      "label": "Show bestseller badge"
-    },
+
     {
       "type": "select",
       "id": "heading_size",
@@ -284,18 +267,7 @@
       "default": false,
       "label": "Show second image on hover"
     },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "default": false,
-      "label": "Show product vendor"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "Show product rating"
-    },
+
     {
       "type": "checkbox",
       "id": "enable_quick_add",
@@ -389,7 +361,6 @@
       "settings": {
         "title": "Best Sellers",
         "products_to_show": 2,
-        "show_bestseller_badge": true,
         "text_alignment": "center"
       }
     }
