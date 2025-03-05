@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'header-layout.css' | asset_url }}" media="all">
+<link rel="stylesheet" href="{{ 'header-non-home.css' | asset_url }}" media="all">
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -118,7 +119,7 @@
   assign header_tag = 'div'
 %}
 
-<{{ header_tag }} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<{{ header_tag }} class="header-wrapper{% if template.name == 'index' %} home-header-wrapper{% endif %}{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
   {%- liquid
     assign social_links = false
     assign localization_forms = false

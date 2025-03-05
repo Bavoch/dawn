@@ -1,0 +1,66 @@
+{% comment %}
+  Renders packaging box selector for product page
+  
+  Accepts:
+  - section_id: {String} The ID of the section containing the selector.
+  
+  Usage:
+  {% render 'packaging-box-selector', section_id: section.id %}
+{% endcomment %}
+
+<div class="packaging-box-selector" {{ block.shopify_attributes }}>
+  <fieldset class="js product-form__input">
+    <legend class="form__label">{{ 'products.product.packaging_box' | t }}</legend>
+    <div class="packaging-box-options">
+      <input type="radio" id="packaging-box-1-{{ section_id }}" name="packaging-box" value="classic" checked>
+      <label for="packaging-box-1-{{ section_id }}" class="packaging-box-option">
+        <span class="packaging-box-image">
+          <img src="{{ 'packaging-classic.png' | asset_url }}" alt="{{ 'products.product.packaging_classic' | t }}" loading="lazy">
+        </span>
+        <span class="packaging-box-name">{{ 'products.product.packaging_classic' | t }}</span>
+      </label>
+      
+      <input type="radio" id="packaging-box-2-{{ section_id }}" name="packaging-box" value="premium">
+      <label for="packaging-box-2-{{ section_id }}" class="packaging-box-option">
+        <span class="packaging-box-image">
+          <img src="{{ 'packaging-premium.png' | asset_url }}" alt="{{ 'products.product.packaging_premium' | t }}" loading="lazy">
+        </span>
+        <span class="packaging-box-name">{{ 'products.product.packaging_premium' | t }}</span>
+      </label>
+      
+      <input type="radio" id="packaging-box-3-{{ section_id }}" name="packaging-box" value="gift">
+      <label for="packaging-box-3-{{ section_id }}" class="packaging-box-option">
+        <span class="packaging-box-image">
+          <img src="{{ 'packaging-gift.png' | asset_url }}" alt="{{ 'products.product.packaging_gift' | t }}" loading="lazy">
+        </span>
+        <span class="packaging-box-name">{{ 'products.product.packaging_gift' | t }}</span>
+      </label>
+    </div>
+  </fieldset>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add packaging box selection to cart form data
+    const productForm = document.querySelector('product-form form');
+    const packagingOptions = document.querySelectorAll('input[name="packaging-box"]');
+    
+    if (productForm && packagingOptions.length) {
+      productForm.addEventListener('submit', function(event) {
+        const selectedPackaging = document.querySelector('input[name="packaging-box"]:checked').value;
+        
+        // Create a hidden input to add the packaging choice to the form data
+        let packagingInput = document.getElementById('packaging-box-input');
+        if (!packagingInput) {
+          packagingInput = document.createElement('input');
+          packagingInput.type = 'hidden';
+          packagingInput.id = 'packaging-box-input';
+          packagingInput.name = 'properties[Packaging Box]';
+          productForm.appendChild(packagingInput);
+        }
+        
+        packagingInput.value = selectedPackaging;
+      });
+    }
+  });
+</script>

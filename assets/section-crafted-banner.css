@@ -12,6 +12,8 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  /* Ensure banner works with transparent header */
+  z-index: 1;
 }
 
 .crafted-banner__video-container {
@@ -120,21 +122,6 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2rem;
-}
-
-.crafted-banner__buttons .button--primary {
-  background-color: #5a1d5a;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-weight: 500;
-  border-radius: 0.3rem;
-  font-size: 1.2rem;
-  transition: background-color 0.3s ease;
-}
-
-.crafted-banner__buttons .button--primary:hover {
-  background-color: #4a174a;
 }
 
 .crafted-banner__media-container {

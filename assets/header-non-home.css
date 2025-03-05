@@ -1,0 +1,50 @@
+/* 
+  Header styles for non-home pages
+*/
+
+.header-wrapper:not(.home-header-wrapper) {
+  background-color: #ffffff;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-wrapper:not(.home-header-wrapper) .header {
+  position: relative;
+}
+
+/* Transparent header for home page */
+.home-header-wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.home-header-wrapper .header {
+  background-color: transparent;
+}
+
+/* White text for home page header */
+.home-header-wrapper .header__menu-item,
+.home-header-wrapper .header__icon,
+.home-header-wrapper .header__heading-link,
+.home-header-wrapper .header__icon span {
+  color: #ffffff;
+}
+
+.home-header-wrapper .header__icon .icon {
+  fill: #ffffff;
+}
+
+/* Adjust logo for home page */
+.home-header-wrapper .header__heading-logo {
+  filter: brightness(0) saturate(100%) invert(100%) !important;
+}
+
+/* For mobile */
+@media screen and (max-width: 749px) {
+  .header-wrapper:not(.home-header-wrapper) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
