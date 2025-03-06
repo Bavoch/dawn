@@ -2077,16 +2077,17 @@ input[type='checkbox'] {
   position: absolute;
   background-color: rgb(var(--color-button));
   color: rgb(var(--color-button-text));
-  height: 1.7rem;
-  width: 1.7rem;
+  height: 2rem;
+  width: 2rem;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   bottom: 0.8rem;
   left: 2.2rem;
-  line-height: calc(1 + 0.1 / var(--font-body-scale));
+  line-height: 1;
+  padding-top: 1px;
 }
 
 /* utility-bar */
